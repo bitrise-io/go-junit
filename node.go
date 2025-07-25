@@ -10,8 +10,8 @@ import "encoding/xml"
 type xmlNode struct {
 	XMLName xml.Name
 	Attrs   map[string]string `xml:"-"`
-	Content []byte
-	Nodes   []xmlNode `xml:",any"`
+	Content []byte            `xml:",innerxml"`
+	Nodes   []xmlNode         `xml:",any"`
 }
 
 func (n *xmlNode) Attr(name string) string {
