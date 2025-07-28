@@ -13,7 +13,7 @@ import (
 
 // findSuites performs a depth-first search through the XML document, and
 // attempts to ingest any "testsuite" tags that are encountered.
-func findSuites(nodes []xmlNode, suites chan Suite) {
+func findSuites(nodes []*xmlNode, suites chan Suite) {
 	for _, node := range nodes {
 		if strings.TrimSpace(string(node.Content)) == "" {
 			node.Content = nil
@@ -27,7 +27,7 @@ func findSuites(nodes []xmlNode, suites chan Suite) {
 	}
 }
 
-func ingestSuite(root xmlNode) Suite {
+func ingestSuite(root *xmlNode) Suite {
 	suite := Suite{
 		Name:       root.Attr("name"),
 		Package:    root.Attr("package"),
@@ -59,7 +59,7 @@ func ingestSuite(root xmlNode) Suite {
 	return suite
 }
 
-func ingestProperties(root xmlNode) map[string]string {
+func ingestProperties(root *xmlNode) map[string]string {
 	props := make(map[string]string, len(root.Nodes))
 
 	for _, node := range root.Nodes {
@@ -73,7 +73,7 @@ func ingestProperties(root xmlNode) map[string]string {
 	return props
 }
 
-func ingestTestcase(root xmlNode) Test {
+func ingestTestcase(root *xmlNode) Test {
 	test := Test{
 		Name:       root.Attr("name"),
 		Classname:  root.Attr("classname"),
@@ -110,7 +110,7 @@ func ingestTestcase(root xmlNode) Test {
 	return test
 }
 
-func ingestError(root xmlNode) Error {
+func ingestError(root *xmlNode) Error {
 	return Error{
 		Body:    string(root.Content),
 		Type:    root.Attr("type"),

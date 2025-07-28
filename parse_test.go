@@ -173,7 +173,9 @@ func TestParse(t *testing.T) {
 			actual, err := parse(bytes.NewReader(test.input))
 			assertNoError(t, err)
 
-			assertEqual(t, test.expected, actual)
+			for i := range test.expected {
+				assertEqual(t, test.expected[i], *actual[i])
+			}
 		})
 	}
 }

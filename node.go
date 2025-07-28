@@ -11,7 +11,7 @@ type xmlNode struct {
 	XMLName xml.Name
 	Attrs   map[string]string `xml:"-"`
 	Content []byte            `xml:",chardata"`
-	Nodes   []xmlNode         `xml:",any"`
+	Nodes   []*xmlNode        `xml:",any"`
 }
 
 func (n *xmlNode) Attr(name string) string {

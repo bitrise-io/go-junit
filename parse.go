@@ -106,7 +106,7 @@ func extractContent(data []byte) ([]byte, error) {
 
 // parse unmarshalls the given XML data into a graph of nodes, and then returns
 // a slice of all top-level nodes.
-func parse(reader io.Reader) ([]xmlNode, error) {
+func parse(reader io.Reader) ([]*xmlNode, error) {
 	var (
 		dec  = xml.NewDecoder(reparentXML(reader))
 		root xmlNode
