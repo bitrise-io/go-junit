@@ -10,7 +10,7 @@ import "encoding/xml"
 type xmlNode struct {
 	XMLName xml.Name
 	Attrs   map[string]string `xml:"-"`
-	Content []byte            `xml:",innerxml"`
+	Content []byte            `xml:",chardata"`
 	Nodes   []xmlNode         `xml:",any"`
 }
 

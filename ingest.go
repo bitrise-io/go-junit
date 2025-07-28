@@ -15,6 +15,9 @@ import (
 // attempts to ingest any "testsuite" tags that are encountered.
 func findSuites(nodes []xmlNode, suites chan Suite) {
 	for _, node := range nodes {
+		if strings.TrimSpace(string(node.Content)) == "" {
+			node.Content = nil
+		}
 		switch node.XMLName.Local {
 		case "testsuite":
 			suites <- ingestSuite(node)
